@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/12/2016 10:43:29 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.Estudiante" table="estudiante" catalog="comedor_universitario" optimistic-lock="version">
+        <id name="tarjeta" type="string">
+            <column name="tarjeta" length="20" />
+            <generator class="assigned" />
+        </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="20" />
+        </property>
+        <property name="apellido" type="string">
+            <column name="apellido" length="40" />
+        </property>
+        <property name="dni" type="string">
+            <column name="dni" length="10" not-null="true" />
+        </property>
+        <property name="cui" type="string">
+            <column name="cui" length="10" not-null="true" />
+        </property>
+        <property name="escuela" type="string">
+            <column name="escuela" length="40" not-null="true" />
+        </property>
+        <property name="celular" type="string">
+            <column name="celular" length="10" />
+        </property>
+        <property name="foto" type="binary">
+            <column name="foto" />
+        </property>
+        <set name="pagos" table="pago" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tarjeta" length="20" not-null="true" />
+            </key>
+            <one-to-many class="modelo.Pago" />
+        </set>
+        <set name="consumos" table="consumo" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="tarjeta" length="20" not-null="true" />
+            </key>
+            <one-to-many class="modelo.Consumo" />
+        </set>
+    </class>
+</hibernate-mapping>

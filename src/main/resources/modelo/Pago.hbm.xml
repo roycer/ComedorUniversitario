@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 23/12/2016 10:43:29 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.Pago" table="pago" catalog="comedor_universitario" optimistic-lock="version">
+        <composite-id name="id" class="modelo.PagoId">
+            <key-property name="id" type="int">
+                <column name="id" />
+            </key-property>
+            <key-property name="tarjeta" type="string">
+                <column name="tarjeta" length="20" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="estudiante" class="modelo.Estudiante" update="false" insert="false" fetch="select">
+            <column name="tarjeta" length="20" not-null="true" />
+        </many-to-one>
+        <property name="fecha" type="date">
+            <column name="fecha" length="10" not-null="true" />
+        </property>
+        <property name="dinero" type="double">
+            <column name="dinero" precision="22" scale="0" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
